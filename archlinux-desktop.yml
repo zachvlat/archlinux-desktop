@@ -1,0 +1,46 @@
+---
+- name: Configure Archlinux desktop with Ansible
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: Update package list and upgrade system
+      pacman:
+        update_cache: true
+        upgrade: true
+
+    - name: Install xorg, git, and other packages with pacman
+      pacman:
+        name:
+          - xorg
+          - git
+          - nano
+          - pantheon
+          - pantheon-session
+          - lightdm
+          - lightdm-gtk-greeter
+          - lightdm-pantheon-greeter
+        state: present
+
+    - name: Configure lightdm greeter session
+      lineinfile:
+        path: /etc/lightdm/lightdm.conf
+        line: "greeter-session = io.elementary-greeter"
+        insertbefore: "^#?\\s*\\[Seat:\\*\\]"
+
+    - name: Configure lightdm gtk greeter
+      template:
+        src: lightdm-gtk-greeter.conf.j2
+        dest: /etc/lightdm/lightdm-gtk-greeter.conf
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Install additional packages from AUR with yay
+      shell: |
+        git clone https://aur.archlinux.org/yay.git
+        cd yay
+        makepkg -si --noconfirm
+        yay -S --noconfirm pantheon-unstable gala-git switchboard-plug-pantheon-tweaks-git pantheon-print file-roller wingpanel-standalone-git wingpanel-indicator-ayatana-git
+      args:
+        chdir: "/home/{{ ansible_user }}/"
