@@ -1,0 +1,16 @@
+com.nextcloud.desktopclient.nextcloud
+com.github.bluesabre.darkbar
+org.telegram.desktop
+com.usebottles.bottles
+org.onlyoffice.desktopeditors
+org.signal.Signal
+com.stremio.Stremio
+org.qbittorrent.qBittorrent
+com.github.maoschanz.drawing
+com.discordapp.Discord
+com.valvesoftware.Steam
+com.visualstudio.code
+org.videolan.VLC
+com.getmailspring.Mailspring
+io.gitlab.librewolf-community
+com.github.Eloston.UngoogledChromium

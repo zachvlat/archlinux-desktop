@@ -1,0 +1,10 @@
+fuse
+wine
+gst-plugin-gtk
+flatpak
+jre17-openjdk
+android-tools
+streamlink
+python3
+git
+neofetch
